@@ -63,6 +63,7 @@
             $message = Response::$statusTexts[$code];
             return $this->errorResponse($message, $code);
         }
+      
             
         // instance not found
         if ($exception instanceof ModelNotFoundException) {
@@ -95,5 +96,7 @@
         return $this->errorResponse('Unexpected error. Try later',
         Response::HTTP_INTERNAL_SERVER_ERROR);
         }
+
+        
         
     }

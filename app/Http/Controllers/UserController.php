@@ -2,6 +2,7 @@
 
     namespace App\Http\Controllers;
 
+    use App\UserJob;
     use Illuminate\Http\Request;
     use App\User;
     use Illuminate\Http\Response;
@@ -20,14 +21,21 @@
 
             $rules = [
                 'username' => 'required|max:20',
-                'password' => 'required:max:20'
+                'password' => 'required:max:20',
+                'jobid' => 'required|numeric|min:1|not_in:0',
             ];
 
+            // echo $request;
             $this->validate($request, $rules);
+
+            // validate if Jobid is found in the table tbluserjob
+            // $userjob = UserJob::findOrFail($request->jobid);
+
             $users = new User;
 
             $users->username = $request->username;
             $users->password = $request->password;
+            $users->jobid = $request->jobid;
 
             $users->save();
             return $this->successResponse($users);
@@ -65,10 +73,14 @@
 
             $rules = [
                 'username' => 'required|max:20',
-                'password' => 'required:max:20'
+                'password' => 'required:max:20',
+                'jobid' => 'required|numeric|min:1|not_in:0',
             ];
 
             $this->validate($request, $rules);
+            // validate if Jobid is found in the table tbluserjob
+            //  $userjob = UserJob::findOrFail($request->jobid);
+            // echo $userjob;
 
             $user = User::find($id);
 
