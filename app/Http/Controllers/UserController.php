@@ -70,7 +70,7 @@
 
         // Update User
         public function updateUser(Request $request,$id){
-
+            
             $rules = [
                 'username' => 'required|max:20',
                 'password' => 'required:max:20',
@@ -88,6 +88,7 @@
 
             $user->username = $request->username;
             $user->password = $request->password;
+            $user->jobid = $request->jobid;
 
             $user->save();
 
